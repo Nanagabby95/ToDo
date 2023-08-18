@@ -4,6 +4,7 @@ body, html {
     justify-content: center;
     align-items: center;
     background-color: blueviolet;
+    color: blueviolet !important;
 }
 
 .task-wrapper {
@@ -15,6 +16,7 @@ body, html {
     align-items: center;
     justify-content: center;
     max-width: 100% !important;
+    box-shadow: 1px 1px 1px 1px gold;
 }
 
 .taskList-wrapper {
@@ -36,13 +38,14 @@ body, html {
     padding: 10px;
 }
 .clear-all button{
-    padding: 15px 20px;
+    padding: 10px 15px;
     font-size: 30px;
     color: white;
     margin: 10px;
     border: none;
     background-color: blueviolet;
-    box-shadow: 10px 5px purple;
+    /* box-shadow: 10px 5px purple; */
+    box-shadow: 10px 10px 20px rgba(229, 255, 0, 0.5), -10px -10px 10px rgba(76, 30, 80, 0.5) !important;
     border-radius: 10px;
 }
 .clear-all button:hover{
@@ -67,6 +70,7 @@ span {
     font-size: 23px;
     font-weight: bold;
    margin-bottom: 30px;
+   color: blueviolet !important;
 }
 .task-content{
     padding-bottom: 20px;
@@ -74,18 +78,19 @@ span {
     height: 40px;
     font-size: 15px;
     font-weight: bold;
+    color: blueviolet !important;
 }
 .task{
    display: flex;
    flex-direction: column;
    border: 1px solid rgb(76, 51, 100);
    padding: 20px;
+   color: blueviolet !important;
 }
 .task-completed {
    margin: 5px;
    padding: 40px;
-   height: 35px;
-   color: blueviolet !important;  
+   height: 35px;  
 }
 
 @media (max-width:280px) {

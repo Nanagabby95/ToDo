@@ -96,3 +96,18 @@ span {
    color: blueviolet !important;  
 }
 
+@media (max-width:280px) {
+    .input-no-border, .task-content{
+        width: 100%;
+    }
+
+    .task-wrapper{
+        margin: 100px;
+    }
+
+    .clear-all button{
+        padding: 15px;
+        font-size: 15px;
+    }
+
+}

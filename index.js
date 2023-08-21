@@ -1,42 +1,64 @@
-
 // STEP 1
-// CREATE VARIABLES FOR TODO
-
+// CREATE TODO VARIABLES 
+const taskInput = document.getElementById("taskInput");
 const addTaskButton = document.getElementById("addTaskBtn");
 const taskContainer = document.getElementById("taskContainer");
 const clearAllButton = document.getElementById("clearAllBtn");
+const userToDoLists = [[]];
 
 // STEP 2
-// ASSIGN RULES TO THEM FOR EVENT LISTENING TO CREATE HTML ELEMENTS
+// SET THE INDEX FOR THE  CURRENT LIST 
+let currentToDoList = 0; 
 
-addTaskButton.addEventListener("click", () => {
-    const newTaskDiv = document.createElement("div");
-    newTaskDiv.classList.add("task");
+// STEP 3
+// SET THE TASK LIST TO BE EMPTY WHEN NOTHING IS ADDED
+addTaskButton.addEventListener("click", ()=>{
+    const task = taskInput.value.trim();
+    if(task !== "") {
+        userToDoLists[currentToDoList].push({task, completed :false});
+        updateTaskList(currentToDoList);
+        taskInput.value =""
+    }
+})
 
-    const taskCompleted = document.createElement("input");
-    taskCompleted.type = "checkbox"; 
-    taskCompleted.classList.add("task-completed"); 
-
-    const taskHeading = document.createElement("input");
-    taskHeading.type = "text";
-    taskHeading.placeholder = "Add Heading";
-    taskHeading.classList.add("input-no-border");
-
-    const taskContent = document.createElement("textarea");
-    taskContent.setAttribute("placeholder", "Add Content");
-    taskContent.classList.add("task-content");
-
-    // STEP 3
-    // CALL THE CALLBACK FUNCTIONS BE EXECUTED ONLY WHEN THE BUTTON IS TRIGERED
-    newTaskDiv.appendChild(taskCompleted);
-    newTaskDiv.appendChild(taskHeading);
-    newTaskDiv.appendChild(taskContent);
-    taskContainer.appendChild(newTaskDiv);
-});
 
 // STEP 4
-// LASTLY, CLEAR ALL TASKS WHEN COMPLETED
+// CREATE HTML ELEMENTS TO TAKE TASK CONTENT 
+function updateTaskList(listIndex) {
+    taskContainer.innerHTML = ""; 
+    for (const taskObj of userToDoLists[listIndex]) {
+        const taskDiv = document.createElement("div");
+        const taskCheckbox = document.createElement("input");
+        taskCheckbox.classList = ("TodoInput")
+        taskCheckbox.type = "checkbox";
+        taskCheckbox.checked = taskObj.completed;
+        taskDiv.appendChild(taskCheckbox);
+
+        const taskText = document.createElement("span");
+        taskText.classList= ("taskSpan")
+        taskText.textContent = taskObj.task;
+        if (taskObj.completed) {
+            taskText.style.textDecoration = "line-through";
+        }
+        taskDiv.appendChild(taskText);
+
+        taskCheckbox.addEventListener("change", () => {
+            taskObj.completed = taskCheckbox.checked;
+            updateTaskList(listIndex);
+        });
+
+        taskContainer.appendChild(taskDiv);
+    }
+}
+
+// STEP 5
+// CLEAR THE ALL THE CURRENT ACITVE LISTS WHEN THE CLEAR BUTTON IS CLICKED
 clearAllButton.addEventListener("click", () => {
-    taskContainer.innerHTML = '';
+    userToDoLists[currentToDoList] = []; 
+    updateTaskList(currentToDoList);
 });
 
+
+// STEP 6
+// RESET THE TASK CONTAINER TO BE EMPTY WHEN THE PAGE RELOADS
+updateTaskList(currentToDoList);
